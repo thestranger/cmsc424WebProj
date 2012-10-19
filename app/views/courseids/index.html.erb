@@ -1,0 +1,33 @@
+<h1>Listing courseids</h1>
+
+<table>
+  <tr>
+    <th>Department</th>
+    <th>Course number</th>
+    <th>Semester</th>
+    <th>Year</th>
+    <th>Section</th>
+    <th>Course</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @courseids.each do |courseid| %>
+  <tr>
+    <td><%= courseid.department %></td>
+    <td><%= courseid.course_number %></td>
+    <td><%= courseid.semester %></td>
+    <td><%= courseid.year %></td>
+    <td><%= courseid.section %></td>
+    <td><%= courseid.course_id %></td>
+    <td><%= link_to 'Show', courseid %></td>
+    <td><%= link_to 'Edit', edit_courseid_path(courseid) %></td>
+    <td><%= link_to 'Destroy', courseid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Courseid', new_courseid_path %>

@@ -1,0 +1,27 @@
+<h1>Listing contains</h1>
+
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Assignment</th>
+    <th>Question</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @contains.each do |contain| %>
+  <tr>
+    <td><%= contain.course_id %></td>
+    <td><%= contain.assignment_id %></td>
+    <td><%= contain.question %></td>
+    <td><%= link_to 'Show', contain %></td>
+    <td><%= link_to 'Edit', edit_contain_path(contain) %></td>
+    <td><%= link_to 'Destroy', contain, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Contain', new_contain_path %>

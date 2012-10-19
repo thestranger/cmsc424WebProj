@@ -1,0 +1,29 @@
+<h1>Listing answereds</h1>
+
+<table>
+  <tr>
+    <th>Student</th>
+    <th>Question</th>
+    <th>Given answer</th>
+    <th>Correct</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @answereds.each do |answered| %>
+  <tr>
+    <td><%= answered.student_id %></td>
+    <td><%= answered.question %></td>
+    <td><%= answered.given_answer %></td>
+    <td><%= answered.correct %></td>
+    <td><%= link_to 'Show', answered %></td>
+    <td><%= link_to 'Edit', edit_answered_path(answered) %></td>
+    <td><%= link_to 'Destroy', answered, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Answered', new_answered_path %>

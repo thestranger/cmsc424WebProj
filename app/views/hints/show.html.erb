@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Question:</b>
+  <%= @hint.question %>
+</p>
+
+<p>
+  <b>Hint:</b>
+  <%= @hint.hint %>
+</p>
+
+
+<%= link_to 'Edit', edit_hint_path(@hint) %> |
+<%= link_to 'Back', hints_path %>

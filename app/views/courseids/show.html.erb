@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Department:</b>
+  <%= @courseid.department %>
+</p>
+
+<p>
+  <b>Course number:</b>
+  <%= @courseid.course_number %>
+</p>
+
+<p>
+  <b>Semester:</b>
+  <%= @courseid.semester %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @courseid.year %>
+</p>
+
+<p>
+  <b>Section:</b>
+  <%= @courseid.section %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @courseid.course_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_courseid_path(@courseid) %> |
+<%= link_to 'Back', courseids_path %>

@@ -1,4 +1,32 @@
 Cmsc424WebProj::Application.routes.draw do
+  resources :questions
+
+  resources :courseids
+
+  resources :courses
+
+  resources :students
+
+  resources :assignments
+
+  resources :assigneds
+
+  resources :answereds
+
+  resources :enrolleds
+
+  resources :ta
+
+  resources :professors
+
+  resources :contains
+
+  resources :hints
+
+  resources :options
+
+  resources :instructors
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

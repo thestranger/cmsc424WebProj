@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  course_id: MyString
+  assignment_id: 1
+  due_date: 2012-10-18
+
+two:
+  course_id: MyString
+  assignment_id: 1
+  due_date: 2012-10-18

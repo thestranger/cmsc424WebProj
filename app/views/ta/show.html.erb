@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Instructor ssn:</b>
+  <%= @tum.instructor_ssn %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @tum.course_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_tum_path(@tum) %> |
+<%= link_to 'Back', ta_index_path %>

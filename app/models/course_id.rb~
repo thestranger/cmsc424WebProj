@@ -1,0 +1,3 @@
+class CourseId < ActiveRecord::Base
+  attr_accessible :course-id, :course-number, :department, :section, :semester, :year
+end

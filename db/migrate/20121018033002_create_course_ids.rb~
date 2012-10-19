@@ -1,0 +1,14 @@
+class CreateCourseIds < ActiveRecord::Migration
+  def change
+    create_table :course_ids do |t|
+      t.string :department
+      t.integer :course-number
+      t.string :semester
+      t.integer :year
+      t.string :section
+      t.string :course-id
+
+      t.timestamps
+    end
+  end
+end

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Course:</b>
+  <%= @contain.course_id %>
+</p>
+
+<p>
+  <b>Assignment:</b>
+  <%= @contain.assignment_id %>
+</p>
+
+<p>
+  <b>Question:</b>
+  <%= @contain.question %>
+</p>
+
+
+<%= link_to 'Edit', edit_contain_path(@contain) %> |
+<%= link_to 'Back', contains_path %>
