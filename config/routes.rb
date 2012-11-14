@@ -1,4 +1,6 @@
 Cmsc424WebProj::Application.routes.draw do
+  get "static_pages/home"
+
   resources :questions
 
   resources :courseids
