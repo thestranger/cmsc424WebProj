@@ -1,5 +1,9 @@
 Cmsc424WebProj::Application.routes.draw do
-  get "static_pages/home"
+  get "students/new"
+
+  root to: 'static_pages#home'
+
+  match 'studentsignup', to: 'students#new'
 
   resources :questions
 
