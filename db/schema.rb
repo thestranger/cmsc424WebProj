@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019025001) do
+ActiveRecord::Schema.define(:version => 20121122052522) do
 
   create_table "answereds", :force => true do |t|
     t.string   "student_id"
@@ -112,9 +112,12 @@ ActiveRecord::Schema.define(:version => 20121019025001) do
   create_table "students", :force => true do |t|
     t.string   "student_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
   end
+
+  add_index "students", ["student_id"], :name => "index_students_on_student_id", :unique => true
 
   create_table "ta", :force => true do |t|
     t.string   "instructor_ssn"
