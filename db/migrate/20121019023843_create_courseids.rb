@@ -10,5 +10,6 @@ class CreateCourseids < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index(:courseids, [:course_id])
   end
 end

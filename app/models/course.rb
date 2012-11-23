@@ -12,4 +12,8 @@
 
 class Course < ActiveRecord::Base
   attr_accessible :course_id, :description, :name
+  has_many :enrolleds, dependent: :destroy
+  has_many :students, :through => :enrolleds
+
+  default_scope order: 'course.course_id DESC'
 end
