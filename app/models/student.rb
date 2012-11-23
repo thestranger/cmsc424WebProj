@@ -23,7 +23,7 @@ class Student < ActiveRecord::Base
   validates(:name, presence: true, length: { maximum: 50})
   validates(:password, presence: true, length: {minimum: 6})
   validates(:password_confirmation, presence: true)
-  validates(:student_id, presence: true, length: { is: 9}, uniqueness: {case_sensitive: false})
+  validates(:student_id, presence: true, uniqueness: {case_sensitive: false})
 
   private
     def create_remember_token
