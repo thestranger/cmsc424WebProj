@@ -1,0 +1,19 @@
+<% provide(:title, 'My Courses') %>
+<h1>My Courses</h1>
+<table>
+  <tr>
+    <th>Course</th>
+    <th></th>
+  </tr>
+
+<% @enrolleds.each do |enrolled| %>
+  <tr>
+    <td><%= enrolled.course_id %></td>
+    <td><%= link_to 'Withdraw', enrolled, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Enroll in Courses', new_enrolled_path %>

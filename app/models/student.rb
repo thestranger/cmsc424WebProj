@@ -12,6 +12,8 @@
 class Student < ActiveRecord::Base
   attr_accessible :name, :email, :student_id, :password, :password_confirmation
   has_secure_password
+  has_many :enrolleds, dependent: :destroy
+  has_many :courses, :through => :enrolleds
 
   before_save { |student| student.email = email.downcase }
   before_save :create_remember_token
@@ -23,7 +25,7 @@ class Student < ActiveRecord::Base
   validates(:name, presence: true, length: { maximum: 50})
   validates(:password, presence: true, length: {minimum: 6})
   validates(:password_confirmation, presence: true)
-  validates(:student_id, presence: true, length: { is: 9}, uniqueness: {case_sensitive: false})
+  validates(:student_id, presence: true, uniqueness: {case_sensitive: false})
 
   private
     def create_remember_token

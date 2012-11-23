@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     instructor = Instructor.find_by_email(params[:session][:email].downcase)
   	if student && student.authenticate(params[:session][:password])
     	sign_in student
-    	redirect_to student
+    	redirect_back_or student
     elsif instructor && instructor.authenticate(params[:session][:password])
       sign_in instructor
       redirect_to instructor

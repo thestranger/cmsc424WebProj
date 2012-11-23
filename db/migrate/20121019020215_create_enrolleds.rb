@@ -6,5 +6,6 @@ class CreateEnrolleds < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index(:enrolleds, [:student_id])
   end
 end

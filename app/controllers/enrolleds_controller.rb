@@ -1,4 +1,7 @@
 class EnrolledsController < ApplicationController
+  before_filter(:signed_in_student, only: [:new, :show_student])
+  before_filter(:correct_student, only: [:show_student, :destroy])
+
   # GET /enrolleds
   # GET /enrolleds.json
   def index
@@ -18,6 +21,14 @@ class EnrolledsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @enrolled }
+    end
+  end
+
+  def show_student
+    @student = Student.find(params[:id])
+    @enrolleds = Enrolled.find_all_by_student_id(@student.student_id)
+    respond_to do |format|
+      format.html
     end
   end
 
@@ -80,4 +91,15 @@ class EnrolledsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  private 
+    def signed_in_student
+      unless student_signed_in?
+        store_location
+          redirect_to studentsignin_url, notice: "Please sign in."
+      end
+    end
+    def correct_student
+      @student = Student.find(params[:id])
+      redirect_to(root_path, notice: "You don't have permission to do that") unless current_user?(@student)
+    end
 end

@@ -11,4 +11,9 @@
 
 class Enrolled < ActiveRecord::Base
   attr_accessible :course_id, :student_id
+  validates :student_id, presence: true
+  validates :course_id, presence: true
+  
+  belongs_to :student
+  belongs_to :course
 end
