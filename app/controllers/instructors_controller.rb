@@ -1,4 +1,26 @@
 class InstructorsController < ApplicationController
+  def show
+  @instructor = Instructor.find(params[:id])
+  end
+
+  def new
+    @instructor = Instructor.new
+  end
+
+  def create
+    @instructor = Instructor.new(params[:instructor])
+    if @instructor.save
+      sign_in @instructor
+      flash[:success] = "Welcome to CourseHelper!"  
+        redirect_to @instructor
+    else
+        render 'new'
+    end
+  end
+end
+
+=begin
+class InstructorsController < ApplicationController
   # GET /instructors
   # GET /instructors.json
   def index
@@ -81,3 +103,4 @@ class InstructorsController < ApplicationController
     end
   end
 end
+=end

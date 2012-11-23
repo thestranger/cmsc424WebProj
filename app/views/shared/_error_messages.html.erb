@@ -1,12 +1,42 @@
-<% if @student.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-error">
-      The form contains <%= pluralize(@student.errors.count, "error") %>.
+<%if @course %>
+  <% if @course.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@course.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+      </ul>
     </div>
-    <ul>
-    <% @student.errors.full_messages.each do |msg| %>
-      <li>* <%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
+  <% end %>
+<% end %>
+<%if @instructor %>
+  <% if @instructor.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@instructor.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @instructor.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+<%if @student %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@student.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 <% end %>

@@ -1,4 +1,27 @@
 class CoursesController < ApplicationController
+  def show
+  @course = Course.find(params[:id])
+  end
+
+  def new
+    @course = Course.new
+  end
+
+  def create
+    @course = Course.new(params[:course])
+    @professor = Professor.new(course_id: params[:course][:course_id], instructor_ssn: current_instructor.ssn)
+    
+    if @course.save and @professor.save
+      flash[:success] = "Course Created"  
+        redirect_to @course
+    else
+        render 'new'
+    end
+  end
+end
+
+=begin
+class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
@@ -26,10 +49,10 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @course }
-    end
+#    respond_to do |format|
+#      format.html # new.html.erb
+#      format.json { render json: @course }
+#    end
   end
 
   # GET /courses/1/edit
@@ -43,6 +66,7 @@ class CoursesController < ApplicationController
     @course = Course.new(params[:course])
 
     respond_to do |format|
+      puts "FORMAT::::"
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render json: @course, status: :created, location: @course }
@@ -81,3 +105,4 @@ class CoursesController < ApplicationController
     end
   end
 end
+=end

@@ -8,12 +8,20 @@ module SessionsHelper
 		!current_student.nil?
 	end
 
+	def instructor_signed_in?
+		!current_instructor.nil?
+	end
+
 	def current_user=(user)
 		@current_user = user
 	end
 
 	def current_student
     	@current_user ||= Student.find_by_remember_token(cookies[:remember_token])
+  	end
+
+  	def current_instructor
+    	@current_user ||= Instructor.find_by_remember_token(cookies[:remember_token])
   	end
 
   	def sign_out

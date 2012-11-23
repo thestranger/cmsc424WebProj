@@ -1,5 +1,28 @@
-<h1>New instructor</h1>
+<% provide(:title, 'Instructor Sign Up') %>
+<h1>Instructor Sign Up</h1>
+<p>Find me in app/views/instructors/new.html.erb</p>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@instructor) do |f| %>
 
-<%= render 'form' %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-<%= link_to 'Back', instructors_path %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :ssn, "SSN" %>
+      <%= f.text_field :ssn %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= render 'shared/error_messages' %>
+      
+      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

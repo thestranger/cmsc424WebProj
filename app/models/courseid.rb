@@ -14,5 +14,11 @@
 #
 
 class Courseid < ActiveRecord::Base
-  attr_accessible :course_id, :course_number, :department, :section, :semester, :year
+	SEMESTERS = ['Fall', 'Winter', 'Spring', 'Summer']
+	
+  attr_accessible :course_id, :coursenumber, :course_number, :department, :section, :semester, :year
+  
+  validates(:department, presence: true, length: { is: 4}, uniqueness: {case_sensitive: false})
+  validates(:coursenumber, presence: true, length: { minimum: 3, maximum: 4}, uniqueness: {case_sensitive: false})
+  validates(:semester, presence: true)
 end

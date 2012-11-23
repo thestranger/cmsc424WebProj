@@ -1,6 +1,10 @@
 Cmsc424WebProj::Application.routes.draw do
   root to: 'static_pages#home'
 
+  match '/instructorsignup', to: 'instructors#new'
+  match '/instructorsignin', to: 'instructors#new'
+  match '/instructorsignout', to: 'sessions#destroy', via: :delete
+
   match '/studentsignup', to: 'students#new'
   match '/studentsignin', to: 'sessions#new'
   match '/studentsignout', to: 'sessions#destroy', via: :delete

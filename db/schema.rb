@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122221347) do
+ActiveRecord::Schema.define(:version => 20121123060429) do
 
   create_table "answereds", :force => true do |t|
     t.string   "student_id"
@@ -83,9 +83,14 @@ ActiveRecord::Schema.define(:version => 20121122221347) do
   create_table "instructors", :force => true do |t|
     t.string   "ssn"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
+    t.string   "email"
+    t.string   "remember_token"
   end
+
+  add_index "instructors", ["remember_token"], :name => "index_instructors_on_remember_token"
 
   create_table "options", :force => true do |t|
     t.text     "question"
