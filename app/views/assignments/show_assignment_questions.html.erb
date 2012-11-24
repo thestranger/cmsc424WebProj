@@ -1,0 +1,32 @@
+<% if instructor_signed_in? %>
+<% provide(:title, 'Assignment '+@assignment.id.to_s+' Questions') %>
+<h1>Assignment <%= @assignment.id.to_s %> Questions</h1>
+<p>
+  <b>Course:</b>
+  <%= @course.course_id %>
+</p>
+<p>
+  <b>Assigment:</b>
+  <%= @assignment.id %>
+</p>
+<br />
+<table>
+	<% if @questions.length > 0 %>
+	<th></th>
+	<th>Question</th>
+	<th></th>
+	<th></th>
+	<% @count = 0 %>
+	<% @questions.each do |question| %>
+  		<tr>
+    		<td><%= @count %></td>
+    		<td><%= questions.question %></td>
+    		<td>Edit Question</td>
+    		<td>Remove Question</td>
+  		</tr>
+  		<% @count+=1 %>
+	<% end %>
+	<%end%>
+</table>
+<p><%= link_to 'Add Question', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/'+@assignment.id.to_s+'/addquestion' %></p>
+<% end %>

@@ -3,13 +3,18 @@ class CoursesController < ApplicationController
   @course = Course.find(params[:id])
   end
 
+  def show_from_course_id
+    @course = Course.find_by_course_id(params[:course_id])
+    @assignments = Assignment.find_all_by_course_id(params[:course_id])
+  end
+
   def new
     @course = Course.new
   end
 
   def create
     @course = Course.new(params[:course])
-    @professor = Professor.new(course_id: params[:course][:course_id], instructor_ssn: current_instructor.ssn)
+    @professor = Teaches.new(course_id: params[:course][:course_id], instructor_id: current_instructor.id, isprofessor: true)
     
     if @course.save and @professor.save
       flash[:success] = "Course Created"  

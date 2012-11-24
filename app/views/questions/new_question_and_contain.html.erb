@@ -1,0 +1,15 @@
+<% if instructor_signed_in? %>
+<% provide(:title, 'Add Question') %>
+<h1>Add Question</h1>
+<p>
+</p>
+<br />
+
+<%= form_for(@question) do |f| %>
+	<%= f.label :question, "Select a question from the question bank" %>
+	<p><b>OR create a new question</b></p>
+    
+    <%= f.submit "Create Assignment", class: "btn btn-large btn-primary" %>
+<% end %>
+
+<% end %>

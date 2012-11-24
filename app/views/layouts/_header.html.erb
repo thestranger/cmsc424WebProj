@@ -30,7 +30,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", current_instructor %></li>
-                <li><%= link_to "Courses", '#' %></li>
+                <li><%= link_to "My Courses", '/instructors/'+current_instructor.id.to_s+'/courses' %></li>
                 <li><%= link_to "Grades", "#" %></li>
                 <li class="divider"></li>
                 <li>

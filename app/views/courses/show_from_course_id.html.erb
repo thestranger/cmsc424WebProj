@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Course:</b>
+  <%= @course.course_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @course.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @course.description %>
+</p>
+
+<table>
+	<% if @assignments.length > 0 %>
+	<th>Assignment</th>
+	<th>Due date </th>
+	<th>Submissions</th>
+	<th></th>
+	<th></th>
+	<% @assignments.each do |assignment| %>
+  		<tr>
+    		<td><%= assignment.id %></td>
+    		<td><%= assignment.due_date.strftime('%b %d, %Y') %></td>
+    		<td></td>
+    		<% if assignment.due_date >= Date.today %>
+    			<td><%= link_to 'Edit Questions', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/'+assignment.id.to_s %></td>
+    		<% else %>
+    			<td></td>
+    		<% end %>
+    		<% if assignment.due_date < Date.today %>
+    			<td>View submissions for grading</td>
+    		<% else %>
+    			<td></td>
+    		<% end %>
+  		</tr>
+	<% end %>
+	<%end%>
+</table>
+
+<%= link_to 'Add Assignment', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/newassignment' %>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
