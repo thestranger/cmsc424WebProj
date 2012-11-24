@@ -1,11 +1,12 @@
 class EnrolledsController < ApplicationController
-  before_filter(:signed_in_student, only: [:new, :show_student])
-  before_filter(:correct_student, only: [:show_student, :destroy])
+  before_filter(:signed_in_student, only: [:new, :show_student, :create])
+  before_filter(:correct_student, only: [:show_student])
 
   # GET /enrolleds
   # GET /enrolleds.json
   def index
     @enrolleds = Enrolled.all
+    @courses = Course.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -36,11 +37,6 @@ class EnrolledsController < ApplicationController
   # GET /enrolleds/new.json
   def new
     @enrolled = Enrolled.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @enrolled }
-    end
   end
 
   # GET /enrolleds/1/edit
@@ -51,7 +47,7 @@ class EnrolledsController < ApplicationController
   # POST /enrolleds
   # POST /enrolleds.json
   def create
-    @enrolled = Enrolled.new(params[:enrolled])
+    @enrolled = Enrolled.new(:student_id => current_student.student_id, :course_id => params[:course_id])
 
     respond_to do |format|
       if @enrolled.save

@@ -1,25 +1,28 @@
-<h1>Listing enrolleds</h1>
+<h1>Enroll in Courses</h1>
 
 <table>
   <tr>
-    <th>Student</th>
     <th>Course</th>
-    <th></th>
-    <th></th>
+    <th>Name</th>
+    <th>Description</th>
     <th></th>
   </tr>
 
-<% @enrolleds.each do |enrolled| %>
+<% @courses.each do |course| %>
   <tr>
-    <td><%= enrolled.student_id %></td>
-    <td><%= enrolled.course_id %></td>
-    <td><%= link_to 'Show', enrolled %></td>
-    <td><%= link_to 'Edit', edit_enrolled_path(enrolled) %></td>
-    <td><%= link_to 'Destroy', enrolled, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= course.course_id %></td>
+    <td><%= course.name %></td>
+    <td><%= course.description %></td>
+    <% if Enrolled.where(:course_id => course.course_id, :student_id => current_student.student_id).length > 0 %>
+      <td>Enrolled</td>
+    <% else %>
+      <td><%= link_to('Enroll', enrolleds_path(:course_id => course.course_id), method: :post) %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Enrolled', new_enrolled_path %>
+<%= link_to 'Back', enrolleds_path %>
+
