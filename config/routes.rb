@@ -9,7 +9,7 @@ Cmsc424WebProj::Application.routes.draw do
   match '/studentsignin', to: 'sessions#new'
   match '/studentsignout', to: 'sessions#destroy', via: :delete
   match 'students/:id/courses', to: 'enrolleds#show_student'
-  match '/student/assignments', to: 'assignments#index'
+  match '/students/:id/assignments', to: 'assignments#index'
 
   
   resources :sessions, only: [:new, :create, :destroy]
