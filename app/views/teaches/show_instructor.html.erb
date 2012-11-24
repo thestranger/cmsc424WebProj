@@ -1,0 +1,25 @@
+<% provide(:title, 'My Courses') %>
+<h1>My Courses</h1>
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Your Status</th>
+    <th></th>
+  </tr>
+
+<% @teaches.each do |teacher| %>
+  <tr>
+    <td><%= teacher.course_id %></td>
+    <%if teacher.isprofessor == true %>
+    	<td>Professor</td>
+    <% else %>
+    	<td>TA</td>
+    <% end %>
+    <td><%= link_to 'Edit Course', '/instructors/'+current_instructor.id.to_s+'/courses/'+teacher.course_id %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Create a course', new_course_path %>

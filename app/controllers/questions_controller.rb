@@ -32,6 +32,11 @@ class QuestionsController < ApplicationController
     end
   end
 
+  #Not only create a question, but also creates a contain relation (betweent question and assignment)
+  def new_question_and_contain
+    @question = Question.new
+  end
+
   # GET /questions/1/edit
   def edit
     @question = Question.find(params[:id])

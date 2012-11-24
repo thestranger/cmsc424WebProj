@@ -26,11 +26,17 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  def show_assignment_questions
+    @course = Course.find_by_course_id(params[:course_id])
+    @assignment = Assignment.find(params[:assignment_id])
+    @questions = Contain.find_all_by_assignment_id(params[:assignment_id])
+  end
+
   # GET /assignments/new
   # GET /assignments/new.json
   def new
     @assignment = Assignment.new
-
+    @course = Course.find_by_course_id(params[:course_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @assignment }

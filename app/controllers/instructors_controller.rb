@@ -17,6 +17,18 @@ class InstructorsController < ApplicationController
         render 'new'
     end
   end
+
+  private 
+    def signed_in_instructor
+      unless instructor_signed_in?
+        store_location
+          redirect_to instructorsignin_url, notice: "Please sign in."
+      end
+    end
+    def correct_instructor
+      @instructor = Instructor.find(params[:id])
+      redirect_to(root_path, notice: "You don't have permission to do that") unless current_user?(@instructor)
+    end
 end
 
 =begin

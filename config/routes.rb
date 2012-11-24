@@ -4,6 +4,11 @@ Cmsc424WebProj::Application.routes.draw do
   match '/instructorsignup', to: 'instructors#new'
   match '/instructorsignin', to: 'instructors#new'
   match '/instructorsignout', to: 'sessions#destroy', via: :delete
+  match '/instructors/:id/courses', to: 'teaches#show_instructor'
+  match '/instructors/:id/courses/:course_id', to: 'courses#show_from_course_id'
+  match '/instructors/:id/courses/:course_id/newassignment', to: 'assignments#new'
+  match '/instructors/:id/courses/:course_id/:assignment_id', to: 'assignments#show_assignment_questions'
+  match '/instructors/:id/courses/:course_id/:assignment_id/addquestion', to: 'questions#new_question_and_contain'
 
   match '/studentsignup', to: 'students#new'
   match '/studentsignin', to: 'sessions#new'
