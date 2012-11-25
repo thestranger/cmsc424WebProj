@@ -14,6 +14,7 @@ class Student < ActiveRecord::Base
   has_secure_password
   has_many :enrolleds, dependent: :destroy
   has_many :courses, :through => :enrolleds
+  has_many :submissions
 
   before_save { |student| student.email = email.downcase }
   before_save :create_remember_token

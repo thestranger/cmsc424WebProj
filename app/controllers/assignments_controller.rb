@@ -2,6 +2,11 @@ class AssignmentsController < ApplicationController
   # GET /assignments
   # GET /assignments.json
   def index
+    @enrolleds = Enrolled.find_all_by_student_id(current_student.student_id)
+    @courses = []
+    @enrolleds.each do |enrolled|
+      @courses.append(enrolled.course_id)
+    end
     @assignments = Assignment.all
 
     respond_to do |format|

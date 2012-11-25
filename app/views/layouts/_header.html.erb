@@ -14,7 +14,7 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", current_student %></li>
                 <li><%= link_to "My Courses", '/students/'+current_student.id.to_s+'/courses' %></li>
-                <li><%= link_to "Assignments", '/student/assignments' %></li>
+                <li><%= link_to "Assignments", assignments_path %></li>
                 <li><%= link_to "Grades", "#" %></li>
                 <li class="divider"></li>
                 <li>

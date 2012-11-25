@@ -13,6 +13,8 @@
 class Question < ActiveRecord::Base
   attr_accessible :correct_answer, :question, :question_type
 
+  has_many :submitted_answers
   has_many :contains
   has_many :assignments, :through => :contains
+  accepts_nested_attributes_for :submitted_answers
 end

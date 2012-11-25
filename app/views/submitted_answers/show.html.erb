@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Question:</b>
+  <%= @submitted_answer.question_id %>
+</p>
+
+<p>
+  <b>Submission:</b>
+  <%= @submitted_answer.submission_id %>
+</p>
+
+<p>
+  <b>Given answer:</b>
+  <%= @submitted_answer.given_answer %>
+</p>
+
+<p>
+  <b>Points:</b>
+  <%= @submitted_answer.points %>
+</p>
+
+
+<%= link_to 'Edit', edit_submitted_answer_path(@submitted_answer) %> |
+<%= link_to 'Back', submitted_answers_path %>

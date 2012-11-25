@@ -6,22 +6,37 @@
     <th>Assignment</th>
     <th>Due date</th>
     <th></th>
-    <th></th>
-    <th></th>
+    <th>Grade</th>
   </tr>
 
 <% @assignments.each do |assignment| %>
-  <tr>
-    <td><%= assignment.course_id %></td>
-    <td><%= assignment.assignment_id %></td>
-    <td><%= assignment.due_date %></td>
-    <td><%= link_to 'Show', assignment %></td>
-    <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
-    <td><%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <% if @courses.include?(assignment.course_id) %>
+    <tr>
+      <td><%= assignment.course_id %></td>
+      <td><%= assignment.id %></td>
+      <td><%= assignment.due_date %></td>
+      <% if assignment.due_date >= Date.today %>
+        <% if s = current_student.submissions.find_by_assignment_id(assignment.id) %>
+          <td><%= link_to 'Edit Submission', edit_submission_path(s) %></td>
+        <% else %>
+          <td><%= link_to 'New Submission', submissions_path(:assignment_id => assignment.id), method: :post %></td>
+        <% end %>
+      <% else %>
+        <% if s = current_student.submissions.find_by_assignment_id(assignment.id) %>
+          <td><%= link_to 'View Submission', submission %></td>
+        <% else %>
+          <td>Not Submitted</td>
+        <% end %>
+      <% end %>
+      <% if s = current_student.submissions.find_by_assignment_id(assignment.id) && s.score %>
+        <td><%= s %></td>
+      <% else %>
+        <td>NG</td>
+      <% end %>
+    </tr>
+  <% end %>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Assignment', new_assignment_path %>
