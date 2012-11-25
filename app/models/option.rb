@@ -11,4 +11,5 @@
 
 class Option < ActiveRecord::Base
   attr_accessible :option, :question
+  belongs_to :question
 end

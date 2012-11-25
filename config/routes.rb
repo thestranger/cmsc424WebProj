@@ -1,4 +1,10 @@
 Cmsc424WebProj::Application.routes.draw do
+  resources :contains
+
+  resources :submitted_answers
+
+  resources :submissions
+
   root to: 'static_pages#home'
 
   match '/instructorsignup', to: 'instructors#new'
@@ -38,8 +44,6 @@ Cmsc424WebProj::Application.routes.draw do
   resources :ta
 
   resources :professors
-
-  resources :contains
 
   resources :hints
 

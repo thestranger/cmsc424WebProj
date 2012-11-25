@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123194305) do
+ActiveRecord::Schema.define(:version => 20121125001424) do
 
   create_table "answereds", :force => true do |t|
     t.string   "student_id"
@@ -40,9 +40,8 @@ ActiveRecord::Schema.define(:version => 20121123194305) do
   end
 
   create_table "contains", :force => true do |t|
-    t.string   "course_id"
+    t.integer  "question_id"
     t.integer  "assignment_id"
-    t.text     "question"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -126,6 +125,27 @@ ActiveRecord::Schema.define(:version => 20121123194305) do
 
   add_index "students", ["remember_token"], :name => "index_students_on_remember_token"
   add_index "students", ["student_id"], :name => "index_students_on_student_id", :unique => true
+
+  create_table "submissions", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "assignment_id"
+    t.float    "score"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "submissions", ["student_id", "assignment_id"], :name => "index_submissions_on_student_id_and_assignment_id"
+
+  create_table "submitted_answers", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "submission_id"
+    t.text     "given_answer"
+    t.float    "points"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "submitted_answers", ["submission_id"], :name => "index_submitted_answers_on_submission_id"
 
   create_table "ta", :force => true do |t|
     t.string   "instructor_ssn"

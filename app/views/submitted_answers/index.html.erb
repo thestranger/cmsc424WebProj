@@ -1,0 +1,29 @@
+<h1>Listing submitted_answers</h1>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Submission</th>
+    <th>Given answer</th>
+    <th>Points</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @submitted_answers.each do |submitted_answer| %>
+  <tr>
+    <td><%= submitted_answer.question_id %></td>
+    <td><%= submitted_answer.submission_id %></td>
+    <td><%= submitted_answer.given_answer %></td>
+    <td><%= submitted_answer.points %></td>
+    <td><%= link_to 'Show', submitted_answer %></td>
+    <td><%= link_to 'Edit', edit_submitted_answer_path(submitted_answer) %></td>
+    <td><%= link_to 'Destroy', submitted_answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Submitted answer', new_submitted_answer_path %>
