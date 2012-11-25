@@ -11,8 +11,15 @@
 	<%= f.label :due_date, "Due Date" %>
     <%= f.date_select :due_date %>
 
-    <%= f.hidden_field :course_id, value: @course.course_id %>
-    <p>(You will be allowed to add questions after creating the assignment.)</p>
+	<%= f.hidden_field :course_id, value: @course.course_id %>
+
+    <%= f.fields_for :questions do |builder| %>
+    	<p class="fields">
+  			<%= render "question_fields", :f => builder %>
+		</p>
+  	<% end %>
+  	<p><%= link_to_add_fields "Add Question", f, :questions %></p>
+
     <%= render 'shared/error_messages' %>
     
     <%= f.submit "Create Assignment", class: "btn btn-large btn-primary" %>

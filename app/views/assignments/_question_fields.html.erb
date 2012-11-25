@@ -1,0 +1,13 @@
+<div class="fields">
+	<%= f.label :question, "Question" %>
+	<%= f.hidden_field :_destroy %>
+  	<%= link_to_remove_fields "Remove Question", f %>
+  	<%= f.text_area :question, :rows => 3 %>
+
+  	<%= f.label :question_type, "Question Type" %>
+  	<%= f.select :question_type, ["Short Answer", "Multiple Choice"] %>
+
+  	<%= f.label :correct_answer, "Answer" %>
+  	<%= f.text_field :correct_answer %>
+
+</div>

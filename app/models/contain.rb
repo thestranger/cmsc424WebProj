@@ -13,6 +13,7 @@
 class Contain < ActiveRecord::Base
   attr_accessible :assignment_id, :course_id, :question
 
-  belongs_to :assignment
-  belongs_to :course
+  has_many :assignments, :dependent => :destroy
+  has_many :questions, :dependent => :destroy
+  accepts_nested_attributes_for :questions
 end

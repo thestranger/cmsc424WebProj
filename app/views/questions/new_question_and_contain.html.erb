@@ -6,10 +6,18 @@
 <br />
 
 <%= form_for(@question) do |f| %>
-	<%= f.label :question, "Select a question from the question bank" %>
+	<%= f.label :question, "Select a question from the question bank or create a new question." %>
+	<%= f.select :question, Question.all, :prompt => "Select a Question"
+%>
 	<p><b>OR create a new question</b></p>
     
     <%= f.submit "Create Assignment", class: "btn btn-large btn-primary" %>
 <% end %>
 
+<script type="text/javascript">
+	document.getElementById("question_question").onChange=displayQuestion;
+	function displayQuestion(){
+		alert("Display Question");
+	}
+</script>
 <% end %>

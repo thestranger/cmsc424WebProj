@@ -12,4 +12,10 @@
 
 class Assignment < ActiveRecord::Base
   attr_accessible :assignment_id, :course_id, :due_date
+
+  belongs_to :course
+  has_many :contains, :dependent => :destroy
+  has_many :questions, :through => :contains
+  accepts_nested_attributes_for :contains
+  accepts_nested_attributes_for :questions
 end

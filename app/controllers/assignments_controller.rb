@@ -32,6 +32,11 @@ class AssignmentsController < ApplicationController
   def new
     @assignment = Assignment.new
     @course = Course.find_by_course_id(params[:course_id])
+
+    1.times do
+ #     contain = @assignment.contains.build
+      question = @assignment.questions.build;
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @assignment }
@@ -46,10 +51,34 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    @assignment = Assignment.new(params[:assignment])
+    temp = params[:assignment]
+    question_list = temp[:questions_attributes]
+    temp.delete(:questions_attributes)
+    @assignment = Assignment.new(temp)
 
+    question_list.each { |x, y|
+      if y[:question] != "" and y[:correct_answer] != ""
+        y.delete(:_destroy)
+        puts x
+        puts y
+        @question = Question.new(y)
+        if not @question.save
+          render 'new'
+          return;
+        end
+      end
+    }
     respond_to do |format|
       if @assignment.save
+        question_list.each { |x, y|
+          contain_hash = {};
+          contain_hash[:assignment_id] = @assignment.id;
+          contain_hash[:question] = y[:question];
+          puts "CONTAINS"
+          puts contain_hash
+          @contain = Contain.new(contain_hash)
+          @contain.save
+        }
         format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
         format.json { render json: @assignment, status: :created, location: @assignment }
       else
