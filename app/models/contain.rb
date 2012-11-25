@@ -7,6 +7,6 @@ class Contain < ActiveRecord::Base
 #  has_many :questions, :dependent => :destroy
   belongs_to :question
   belongs_to :assignment
-  accepts_nested_attributes_for :questions
+#  accepts_nested_attributes_for :questions
 
 end

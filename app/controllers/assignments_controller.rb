@@ -56,33 +56,42 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
+    question_ids = [];
     temp = params[:assignment]
     question_list = temp[:questions_attributes]
     temp.delete(:questions_attributes)
     @assignment = Assignment.new(temp)
 
+    count = 0;
     question_list.each { |x, y|
       if y[:question] != "" and y[:correct_answer] != ""
         y.delete(:_destroy)
         puts x
         puts y
         @question = Question.new(y)
-        if not @question.save
+        if @question.save
+          question_ids[count] = @question.id
+        else
           render 'new'
           return;
         end
+        count += 1;
       end
     }
     respond_to do |format|
       if @assignment.save
+        count = 0;
         question_list.each { |x, y|
-          contain_hash = {};
-          contain_hash[:assignment_id] = @assignment.id;
-          contain_hash[:question] = y[:question];
-          puts "CONTAINS"
-          puts contain_hash
-          @contain = Contain.new(contain_hash)
-          @contain.save
+          if y[:question] != "" and y[:correct_answer] != ""
+            contain_hash = {};
+            contain_hash[:assignment_id] = @assignment.id;
+            contain_hash[:question_id] = question_ids[count];
+            puts "CONTAINS"
+            puts contain_hash
+            @contain = Contain.new(contain_hash)
+            @contain.save
+            count += 1;
+          end
         }
         format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
         format.json { render json: @assignment, status: :created, location: @assignment }
