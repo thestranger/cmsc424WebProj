@@ -1,0 +1,28 @@
+<% if instructor_signed_in? %>
+<% provide(:title, 'Add Instructor') %>
+<h1>Add Instructor to Course</h1>
+<!--<p>Find me in app/views/courses/new.html.erb</p>-->
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@teach) do |f| %>
+
+    <%= f.hidden_field :course_id, value: params[:course_id] %>
+
+    <%= f.select :instructor_id, options_from_collection_for_select(Instructor.all, :id, :name), {:prompt => "Choose Instructor"}%>
+
+    <%= f.select :instructor_id, options_for_select([["Professor", "true"], ["TA", "false"]]), {:prompt => "Choose Permission Level"}%>
+
+      <%= render 'shared/error_messages' %>
+      
+      <%= f.submit "Add Instructor", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<% else %>
+<% provide(:title, 'Access Denied') %>
+<h1>Access Denied</h1>
+<!--<p>Find me in app/views/courses/new.html.erb</p>-->
+<div class="row">
+  <p> Only instructors have permission to create courses.</p>
+</div>
+<% end %>

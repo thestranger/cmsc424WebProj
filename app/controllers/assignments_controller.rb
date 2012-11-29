@@ -29,7 +29,7 @@ class AssignmentsController < ApplicationController
   def show_assignment_questions
     @course = Course.find_by_course_id(params[:course_id])
     @assignment = Assignment.find(params[:assignment_id])
-    @questions = Contain.find_all_by_assignment_id(params[:assignment_id])
+    @contain_list = Contain.find_all_by_assignment_id(params[:assignment_id])
   end
 
   # GET /assignments/new
@@ -64,8 +64,9 @@ class AssignmentsController < ApplicationController
 
     count = 0;
     question_list.each { |x, y|
-      if y[:question] != "" and y[:correct_answer] != ""
+      if y[:question] != ""
         y.delete(:_destroy)
+        y.delete(:question_select)
         puts x
         puts y
         @question = Question.new(y)
@@ -82,7 +83,7 @@ class AssignmentsController < ApplicationController
       if @assignment.save
         count = 0;
         question_list.each { |x, y|
-          if y[:question] != "" and y[:correct_answer] != ""
+          if y[:question] != ""
             contain_hash = {};
             contain_hash[:assignment_id] = @assignment.id;
             contain_hash[:question_id] = question_ids[count];
@@ -93,7 +94,7 @@ class AssignmentsController < ApplicationController
             count += 1;
           end
         }
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
+        format.html { redirect_to '/instructors/'+current_instructor.id.to_s+'/courses/'+@assignment.course_id, notice: 'Assignment was successfully created.' }
         format.json { render json: @assignment, status: :created, location: @assignment }
       else
         format.html { render action: "new" }

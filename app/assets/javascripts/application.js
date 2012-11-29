@@ -15,6 +15,8 @@
 //= require bootstrap
 //= require_tree .
 
+var count = 1;
+
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val = "1";
   $(link).closest(".fields").hide();
@@ -27,5 +29,38 @@ function add_fields(link, association, content) {
 }
 
 function displayQuestion(link) {
-	alert("Changed question");
+	if (link.value == ""){
+		$(link).next().html(""); //Set question text
+		$(link).next().prop("disabled", false);
+
+		$(link).next().next().next().val("Short Answer"); //Set question type
+		$(link).next().next().next().prop("disabled", false);
+
+		$(link).next().next().next().next().next().text(""); //Set correct answer
+		$(link).next().next().next().next().next().prop("disabled", false);
+
+	}
+	else{
+		$(link).next().html(link.options[link.value].text); //Set question text
+		$(link).next().prop("disabled", true);
+
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("GET","/questionquery/" + link.value, false);
+		xmlhttp.send();
+
+		var start = xmlhttp.responseText.indexOf("||||");
+		var end = xmlhttp.responseText.indexOf("||||", start+4);
+		var typeAndAnswer = xmlhttp.responseText.substring(start+4, end);
+		var middle = typeAndAnswer.indexOf(";;");
+		var questionType = typeAndAnswer.substring(0, middle);
+		var answer = typeAndAnswer.substring(middle + 2);
+
+		$(link).next().next().next().val(questionType); //Set question type
+		$(link).next().next().next().prop("disabled", true);
+
+		$(link).next().next().next().next().next().text(answer); //Set correct answer
+		$(link).next().next().next().next().next().prop("disabled", true);
+	}
+	//assignment[questions_attributes][0][question_type]
+	//assignment[questions_attributes][new_questions][question_type]
 }

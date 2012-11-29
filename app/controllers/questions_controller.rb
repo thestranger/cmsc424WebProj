@@ -42,6 +42,10 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def ajax_get
+    @question = Question.find(params[:id])
+  end
+
   # POST /questions
   # POST /questions.json
   def create

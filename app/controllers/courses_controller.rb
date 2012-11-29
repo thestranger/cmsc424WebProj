@@ -1,4 +1,13 @@
 class CoursesController < ApplicationController
+  def index
+    @courses = Course.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @courses }
+    end
+  end
+  
   def show
   @course = Course.find(params[:id])
   end
@@ -18,11 +27,38 @@ class CoursesController < ApplicationController
     
     if @course.save and @professor.save
       flash[:success] = "Course Created"  
-        redirect_to @course
+        redirect_to '/instructors/'+current_instructor.id.to_s+'/courses/'
     else
         render 'new'
     end
   end
+
+  def destroy
+    @course = Course.find(params[:id])
+    @course.destroy
+    @teaches = Teaches.find_all_by_course_id(@course.course_id)
+    @teaches.each do |t|
+      t.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to '/instructors/'+current_instructor.id.to_s+'/courses/' }
+      format.json { head :no_content }
+    end
+  end
+
+  def delete_teaches
+    @teaches = Teaches.find_all_by_course_id(params[:course_id])
+    @teaches.each do |t|
+      t.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to '/instructors/'+current_instructor.id.to_s+'/courses/' }
+      format.json { head :no_content }
+    end
+  end
+
 end
 
 =begin

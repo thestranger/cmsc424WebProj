@@ -16,5 +16,7 @@ class Course < ActiveRecord::Base
   validates(:course_id, presence: true, length: { is: 7}, uniqueness: {case_sensitive: false})
   validates(:name, presence: true, uniqueness: {case_sensitive: false})
   validates(:description, presence: true)
+
+  has_many :teaches#, dependent: :destroy
 end
 

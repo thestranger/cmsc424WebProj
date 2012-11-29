@@ -4,7 +4,10 @@ class Teaches < ActiveRecord::Base
   validates :instructor_id, presence: true
   validates :course_id, presence: true
   validates :isprofessor, presence: true
-  
-  belongs_to :instructor
-  belongs_to :course
+  validates :instructor_id, :uniqueness => {:scope => :course_id}
+
+#  has_many :instructor
+#  has_many :course
+#  accepts_nested_attributes_for :instructor
+#  accepts_nested_attributes_for :course
 end

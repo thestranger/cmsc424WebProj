@@ -11,13 +11,14 @@
 </p>
 <br />
 <table>
-	<% if @questions.length > 0 %>
+	<% if @contain_list.length > 0 %>
 	<th></th>
 	<th>Question</th>
 	<th></th>
 	<th></th>
 	<% @count = 0 %>
-	<% @questions.each do |question| %>
+	<% @contain_list.each do |contain| %>
+  <% question = Question.find(contain.question_id) %>
   		<tr>
     		<td><%= @count %></td>
     		<td><%= question.question %></td>

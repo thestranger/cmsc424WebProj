@@ -7,6 +7,6 @@ class CreateCourses < ActiveRecord::Migration
 
       t.timestamps
     end
-  add_index(:course, [:course_id])
+  add_index(:courses, [:course_id])
   end
 end

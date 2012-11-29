@@ -12,6 +12,7 @@
 
 class Assignment < ActiveRecord::Base
   attr_accessible :assignment_id, :course_id, :due_date, :question
+  attr_accessor :question_select
 
   belongs_to :course
   has_many :submissions

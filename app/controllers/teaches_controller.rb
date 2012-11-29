@@ -1,90 +1,89 @@
 class TeachesController < ApplicationController
   before_filter(:signed_in_instructor, only: [:new, :show_instructor])
   before_filter(:correct_instructor, only: [:show_instructor, :destroy])
-
-  # GET /professors
-  # GET /professors.json
+  # GET /teaches
+  # GET /teaches.json
   def index
-    @teachers = Teaches.all
+    @teaches = Teach.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @teachers }
+      format.json { render json: @teaches }
     end
   end
 
-  # GET /professors/1
-  # GET /professors/1.json
+  # GET /teaches/1
+  # GET /teaches/1.json
   def show
-    @teacher = Teaches.find(params[:id])
+    @teach = Teach.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @teacher }
+      format.json { render json: @teach }
     end
   end
 
-def show_instructor
+  def show_instructor
     @instructor = Instructor.find(params[:id])
     @teaches = Teaches.find_all_by_instructor_id(@instructor.id)
     respond_to do |format|
       format.html
     end
-end
+  end
 
-  # GET /professors/new
-  # GET /professors/new.json
+  # GET /teaches/new
+  # GET /teaches/new.json
   def new
-    @teacher = Teaches.new
+    @teach = Teach.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @teacher }
+      format.json { render json: @teach }
     end
   end
 
-  # GET /professors/1/edit
+  # GET /teaches/1/edit
   def edit
-    @teacher = Teaches.find(params[:id])
+    @teach = Teach.find(params[:id])
   end
 
-  # POST /professors
-  # POST /professors.json
+  # POST /teaches
+  # POST /teaches.json
   def create
-    @teacher = Teaches.new(params[:teacher])
+    @teach = Teach.new(params[:teach])
 
     respond_to do |format|
-      if @teacher.save
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
-        format.json { render json: @teacher, status: :created, location: @teacher }
+      if @teach.save
+        format.html { redirect_to @teach, notice: 'Teach was successfully created.' }
+        format.json { render json: @teach, status: :created, location: @teach }
       else
         format.html { render action: "new" }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        format.json { render json: @teach.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /professors/1
-  # PUT /professors/1.json
+  # PUT /teaches/1
+  # PUT /teaches/1.json
   def update
-    @teacher = Teaches.find(params[:id])
+    @teach = Teach.find(params[:id])
 
     respond_to do |format|
-      if @teacher.update_attributes(params[:teacher])
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
+      if @teach.update_attributes(params[:teach])
+        format.html { redirect_to @teach, notice: 'Teach was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        format.json { render json: @teach.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /professors/1
-  # DELETE /professors/1.json
+  # DELETE /teaches/1
+  # DELETE /teaches/1.json
   def destroy
-    @teacher = Teaches.find(params[:id])
-    @teacher.destroy
+    @teach = Teach.find(params[:id])
+    @teach.destroy
 
     respond_to do |format|
       format.html { redirect_to teaches_url }

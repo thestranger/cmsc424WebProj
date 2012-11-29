@@ -17,4 +17,8 @@
 
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
+<% if instructor_signed_in? %>
+<%= link_to 'Back', '/instructors/'+current_instructor.id.to_s+'/courses/' %>
+<% else %>
 <%= link_to 'Back', courses_path %>
+<% end %>

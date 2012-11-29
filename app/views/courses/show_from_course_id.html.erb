@@ -43,6 +43,7 @@
 </table>
 
 <%= link_to 'Add Assignment', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/newassignment' %>
-
+<%= link_to 'Add Instructor', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/newinstructor' %>
+<br />
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>

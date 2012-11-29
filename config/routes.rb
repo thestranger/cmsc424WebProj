@@ -1,4 +1,6 @@
 Cmsc424WebProj::Application.routes.draw do
+  resources :teaches
+
   resources :contains
 
   resources :submitted_answers
@@ -7,12 +9,15 @@ Cmsc424WebProj::Application.routes.draw do
 
   root to: 'static_pages#home'
 
+  match '/questionquery/:id', to: 'questions#ajax_get'
   match '/instructorsignup', to: 'instructors#new'
   match '/instructorsignin', to: 'instructors#new'
   match '/instructorsignout', to: 'sessions#destroy', via: :delete
   match '/instructors/:id/courses', to: 'teaches#show_instructor'
+  match '/instructors/:id/courses/:course_id', to: 'courses#delete_teaches', via: :delete
   match '/instructors/:id/courses/:course_id', to: 'courses#show_from_course_id'
   match '/instructors/:id/courses/:course_id/newassignment', to: 'assignments#new'
+  match '/instructors/:id/courses/:course_id/newinstructor', to: 'teaches#new'
   match '/instructors/:id/courses/:course_id/:assignment_id', to: 'assignments#show_assignment_questions'
   match '/instructors/:id/courses/:course_id/:assignment_id/addquestion', to: 'questions#new_question_and_contain'
 

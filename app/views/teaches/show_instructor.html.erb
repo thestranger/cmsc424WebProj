@@ -8,6 +8,7 @@
   </tr>
 
 <% @teaches.each do |teacher| %>
+<% course = Course.find_by_course_id(teacher.course_id) %>
   <tr>
     <td><%= teacher.course_id %></td>
     <%if teacher.isprofessor == true %>
@@ -15,7 +16,11 @@
     <% else %>
     	<td>TA</td>
     <% end %>
-    <td><%= link_to 'Edit Course', '/instructors/'+current_instructor.id.to_s+'/courses/'+teacher.course_id %></td>
+    <td><%= link_to 'View Course', '/instructors/'+current_instructor.id.to_s+'/courses/'+teacher.course_id %></td>
+    <td><%= link_to 'Stop Teaching', '/instructors/'+current_instructor.id.to_s+'/courses/'+teacher.course_id , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%if teacher.isprofessor == true %>
+    <td><%= link_to 'Delete Course', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
