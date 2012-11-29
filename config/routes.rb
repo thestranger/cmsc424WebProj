@@ -20,6 +20,8 @@ Cmsc424WebProj::Application.routes.draw do
   match '/instructors/:id/courses/:course_id/newinstructor', to: 'teaches#new'
   match '/instructors/:id/courses/:course_id/:assignment_id', to: 'assignments#show_assignment_questions'
   match '/instructors/:id/courses/:course_id/:assignment_id/addquestion', to: 'questions#new_question_and_contain'
+  match '/instructors/:instuctor_id/courses/submissions/grade/:assignment_id', to: 'submissions#grade_all'
+  match '/instructors/:instuctor_id/courses/submissions/grade/:assignment_id/:submission_id', to: 'submissions#grade'
 
   match '/studentsignup', to: 'students#new'
   match '/studentsignin', to: 'sessions#new'

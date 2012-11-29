@@ -17,14 +17,14 @@ module SessionsHelper
 	end
 
 	def current_student
-		if(Student.find_by_remember_token(cookies[:remember_token]))
-    		@current_user ||= Student.find_by_remember_token(cookies[:remember_token])
-    	end
+    if Student.find_by_remember_token(cookies[:remember_token])
+      @current_user ||= Student.find_by_remember_token(cookies[:remember_token])
+    end
   end
 
   def current_instructor
-  	if (Instructor.find_by_remember_token(cookies[:remember_token]))
-    	@current_user ||= Instructor.find_by_remember_token(cookies[:remember_token])
+    if Instructor.find_by_remember_token(cookies[:remember_token])
+      @current_user ||= Instructor.find_by_remember_token(cookies[:remember_token])
     end
   end
 

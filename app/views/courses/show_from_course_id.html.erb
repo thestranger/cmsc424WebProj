@@ -33,7 +33,7 @@
     			<td></td>
     		<% end %>
     		<% if assignment.due_date < Date.today %>
-    			<td>View submissions for grading</td>
+    			<td><%= link_to 'View submissions for grading', 'submissions/grade/'+assignment.id.to_s %></td>
     		<% else %>
     			<td></td>
     		<% end %>
