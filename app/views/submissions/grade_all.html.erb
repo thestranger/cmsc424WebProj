@@ -1,0 +1,25 @@
+<h1>Listing submissions</h1>
+
+<table>
+  <tr>
+    <th>Student</th>
+    <th>Assignment</th>
+    <th>Score</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @submissions.each do |submission| %>
+  <tr>
+    <td><%= submission.student_id %></td>
+    <td><%= submission.assignment_id %></td>
+    <td><%= submission.score %></td>
+    <% if submission.score %>
+      <td><%= link_to 'Regrade', request.fullpath + '/' + submission.id.to_s %></td>
+    <% else %>
+      <td><%= link_to 'Grade', request.fullpath + '/' + submission.id.to_s %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>

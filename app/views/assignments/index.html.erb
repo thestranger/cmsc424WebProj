@@ -23,7 +23,7 @@
         <% end %>
       <% else %>
         <% if s = current_student.submissions.find_by_assignment_id(assignment.id) %>
-          <td><%= link_to 'View Submission', submission %></td>
+          <td><%= link_to 'View Submission', s %></td>
         <% else %>
           <td>Not Submitted</td>
         <% end %>

@@ -12,9 +12,24 @@
 
 <p>
   <b>Score:</b>
-  <%= @submission.score %>
+  <% if @submission %>
+	<%= @submission.score %>/<%= @submission.assignment.questions.size %> (<%= (@submission.score/@submission.assignment.questions.size) * 100 %>%)
+  <% else %>
+  	Not Yet Graded
+  <% end %>
+</p>
+
+<p>
+	<% @submission.submitted_answers.each do |answer| %>
+		<b><%= answer.question.question %></b>
+		<br />
+		<%= answer.given_answer %>
+		<br />
+		<br />
+	<% end %>
 </p>
 
 
+
 <%= link_to 'Edit', edit_submission_path(@submission) %> |
-<%= link_to 'Back', submissions_path %>
+<%= link_to 'My Assignments', assignments_path %>

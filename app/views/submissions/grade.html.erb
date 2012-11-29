@@ -1,0 +1,18 @@
+<h1>Grading Submission <%= @submission.id %></h1>
+<br />
+<br />
+<%= form_for @submission do |f| %>
+   <%= f.fields_for :submitted_answers do |answer| %>
+     <p>
+      <h5><%= @assignment.questions.find(answer.object.question_id).question %></h5>
+      <br />
+      <p>
+        <%= answer.object.given_answer %>
+      </p>
+      <%= answer.label :points, "Points" %>
+      <%= answer.text_field :points %>
+      <br />
+     </p>
+   <% end %>
+   <p><%= f.submit "Save" %></p>
+<% end %>
