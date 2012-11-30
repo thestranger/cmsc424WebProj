@@ -64,7 +64,7 @@ class AssignmentsController < ApplicationController
 
     count = 0;
     question_list.each { |x, y|
-      if y[:question] != ""
+      if y[:question] != "" and y[:question_select] == ""
         y.delete(:_destroy)
         y.delete(:question_select)
         puts x
@@ -83,7 +83,13 @@ class AssignmentsController < ApplicationController
       if @assignment.save
         count = 0;
         question_list.each { |x, y|
-          if y[:question] != ""
+          if y[:question_select] != ""
+            contain_hash = {};
+            contain_hash[:assignment_id] = @assignment.id;
+            contain_hash[:question_id] = y[:question_select]
+            @contain = Contain.new(contain_hash)
+            @contain.save
+          elsif y[:question] != ""
             contain_hash = {};
             contain_hash[:assignment_id] = @assignment.id;
             contain_hash[:question_id] = question_ids[count];

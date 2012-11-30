@@ -25,7 +25,7 @@ class TeachesController < ApplicationController
 
   def show_instructor
     @instructor = Instructor.find(params[:id])
-    @teaches = Teaches.find_all_by_instructor_id(@instructor.id)
+    @teaches = Teach.find_all_by_instructor_id(@instructor.id)
     respond_to do |format|
       format.html
     end
@@ -35,7 +35,7 @@ class TeachesController < ApplicationController
   # GET /teaches/new.json
   def new
     @teach = Teach.new
-
+    @cid = params[:course_id]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @teach }
@@ -54,11 +54,14 @@ class TeachesController < ApplicationController
 
     respond_to do |format|
       if @teach.save
-        format.html { redirect_to @teach, notice: 'Teach was successfully created.' }
+        format.html { redirect_to '/instructors/'+current_instructor.id.to_s+'/courses/'+@teach.course_id, notice: 'Teacher was successfully added.' }
         format.json { render json: @teach, status: :created, location: @teach }
       else
+ #       format.html { redirect_to '/instructors/'+current_instructor.id.to_s+'/courses/'+@teach.course_id+'/newinstructor'}
         format.html { render action: "new" }
         format.json { render json: @teach.errors, status: :unprocessable_entity }
+
+        #'/instructors/'+params[:id]+'/courses/'+params[:course_id]+'/newinstructor'
       end
     end
   end

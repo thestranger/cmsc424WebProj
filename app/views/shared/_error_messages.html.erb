@@ -40,3 +40,17 @@
     </div>
   <% end %>
 <% end %>
+<%if @teach %>
+  <% if @teach.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@teach.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @teach.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

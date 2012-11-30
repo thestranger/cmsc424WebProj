@@ -23,7 +23,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(params[:course])
-    @professor = Teaches.new(course_id: params[:course][:course_id], instructor_id: current_instructor.id, isprofessor: true)
+    @professor = Teach.new(course_id: params[:course][:course_id], instructor_id: current_instructor.id, isprofessor: true)
     
     if @course.save and @professor.save
       flash[:success] = "Course Created"  
@@ -36,7 +36,7 @@ class CoursesController < ApplicationController
   def destroy
     @course = Course.find(params[:id])
     @course.destroy
-    @teaches = Teaches.find_all_by_course_id(@course.course_id)
+    @teaches = Teach.find_all_by_course_id(@course.course_id)
     @teaches.each do |t|
       t.destroy
     end
@@ -48,9 +48,12 @@ class CoursesController < ApplicationController
   end
 
   def delete_teaches
-    @teaches = Teaches.find_all_by_course_id(params[:course_id])
+    @teaches = Teach.find_all_by_course_id(params[:course_id])
     @teaches.each do |t|
-      t.destroy
+
+      if t.instructor_id == params[:id].to_i
+        t.destroy
+      end
     end
 
     respond_to do |format|

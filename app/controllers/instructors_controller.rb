@@ -18,6 +18,27 @@ class InstructorsController < ApplicationController
     end
   end
 
+  # GET /instructors/1/edit
+  def edit
+    @instructor = Instructor.find(params[:id])
+  end
+
+  # PUT /instructors/1
+  # PUT /instructors/1.json
+  def update
+    @instructor = Instructor.find(params[:id])
+
+    respond_to do |format|
+      if @instructor.update_attributes(params[:instructor])
+        format.html { redirect_to @instructor, notice: 'Instructor was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @instructor.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private 
     def signed_in_instructor
       unless instructor_signed_in?

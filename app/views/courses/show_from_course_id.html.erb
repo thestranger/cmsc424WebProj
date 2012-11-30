@@ -20,30 +20,37 @@
 	<th>Assignment</th>
 	<th>Due date </th>
 	<th>Submissions</th>
+<!--	<th></th> -->
 	<th></th>
-	<th></th>
+  <% counter = 1 %>
 	<% @assignments.each do |assignment| %>
+  <% submissions = Submission.find_all_by_assignment_id(assignment.id) %>
+  <% enrolleds = Enrolled.find_all_by_course_id(@course.course_id) %>
   		<tr>
-    		<td><%= assignment.id %></td>
+    		<td><%= counter %></td>
     		<td><%= assignment.due_date.strftime('%b %d, %Y') %></td>
-    		<td></td>
-    		<% if assignment.due_date >= Date.today %>
+    		<td><%= submissions.length %>/<%= enrolleds.length %></td>
+  <!--  		<% if assignment.due_date >= Date.today %>
     			<td><%= link_to 'Edit Questions', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/'+assignment.id.to_s %></td>
     		<% else %>
     			<td></td>
     		<% end %>
+      -->
     		<% if assignment.due_date < Date.today %>
     			<td><%= link_to 'View submissions for grading', 'submissions/grade/'+assignment.id.to_s %></td>
     		<% else %>
     			<td></td>
     		<% end %>
   		</tr>
+      <% counter += 1 %>
 	<% end %>
 	<%end%>
 </table>
 
-<%= link_to 'Add Assignment', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/newassignment' %>
-<%= link_to 'Add Instructor', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/newinstructor' %>
+<%= link_to 'Add Assignment', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/newassignment' %> | 
+<% teaches = Teach.find_by_instructor_id_and_course_id(current_instructor.id, @course.course_id) %>
+  <%if teaches.isprofessor == true %>
+  <%= link_to 'Add Instructor', '/instructors/'+current_instructor.id.to_s+'/courses/'+@course.course_id+'/newinstructor' %>
+  <% end %>
 <br />
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<%= link_to 'Back', '/instructors/'+current_instructor.id.to_s+'/courses/' %>

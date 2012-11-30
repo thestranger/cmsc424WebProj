@@ -6,11 +6,11 @@
   <div class="span6 offset3">
     <%= form_for(@teach) do |f| %>
 
-    <%= f.hidden_field :course_id, value: params[:course_id] %>
+    <%= f.hidden_field :course_id, value: @cid %>
 
     <%= f.select :instructor_id, options_from_collection_for_select(Instructor.all, :id, :name), {:prompt => "Choose Instructor"}%>
 
-    <%= f.select :instructor_id, options_for_select([["Professor", "true"], ["TA", "false"]]), {:prompt => "Choose Permission Level"}%>
+    <%= f.select :isprofessor, options_for_select([["Professor", true], ["TA", false]]), {:prompt => "Choose Permission Level"}%>
 
       <%= render 'shared/error_messages' %>
       
